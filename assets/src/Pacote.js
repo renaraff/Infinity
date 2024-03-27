@@ -6,6 +6,7 @@ import Suica from "./Suica"
 
 export default function Roteiros( {navigation} )
 {
+
     
     return (  
     <ScrollView style={css.header}>
