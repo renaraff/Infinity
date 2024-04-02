@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import Rotas from './assets/src/rotas';
-import UserProvider from './assets/src/Context/UserContext';
+import Rotas from './src/Rotas';
+import UserProvider from './src/Context/UserContext';
 
   export default function App() {
     

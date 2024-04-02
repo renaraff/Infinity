@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from './login';
-import Pacote from './Pacote';
 import Agenda from './agenda';
 import Mapa from './mapa';
 import Viagens from './viagens';
 import { useContext } from 'react';
 import { UserContext } from './Context/UserContext';
+import Roteiros from './Roteiros';
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ const Tab = createBottomTabNavigator();
   return (
         <NavigationContainer>
         <Tab.Navigator initialRouteName="Pacote">
-        <Tab.Screen name="Roteiros" component={Pacote} options={{ tabBarIcon: ({ color, size }) => (
+        <Tab.Screen name="Roteiros" component={Roteiros} options={{ tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="airplane" color={color} size={size} />
             ),}} />
         <Tab.Screen name="Agendamento" component={Agenda} options={{ tabBarIcon: ({ color, size }) => (

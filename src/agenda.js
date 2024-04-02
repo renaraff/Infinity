@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Keyboard, Platform } from "react-native";
 import * as Calendar from 'expo-calendar';
-import uuid from 'react-uuid';
 import Lista from './viagens';
+import uuid from 'react-native-uuid'
+import {useBatteryLevel} from "expo-battery"
 
 export default function Agenda()
 {
@@ -10,6 +11,15 @@ export default function Agenda()
     const[ inicio, setInicio ] = useState();
     const[ final, setFinal ] = useState();
     const[ dados, setDados ] = useState([]);
+    const[ bateria , setBateria] = useState()
+
+    const batteryLevel = useBatteryLevel();
+
+    useEffect( () => {
+      setBateria( (batteryLevel *100).toFixed(0) )
+    } , [batteryLevel] );
+    
+    
 
     async function getPermissions()
     {
@@ -86,25 +96,25 @@ export default function Agenda()
 
 
     return(
-        <View>
-            <View style={css.container}>
-            <Text style={css.texto}>AGENDAR VIAGEM</Text>
+          <View style={[css.tudo, { backgroundColor: bateria > 20 ? '#EFEFEF' : '#353535' }]}>
+            <View style={[css.container, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, {shadowColor: bateria > 20 ? '#000' : '#fff'}, {borderColor: bateria > 20 ? '#ddd' : '#181818'}]}>
+            <Text style={[css.texto,  { color: bateria > 20 ? '#000' : '#fff' }]}>AGENDAR VIAGEM</Text>
                 <TextInput 
                 placeholder="Destino" 
-                style={css.input}
+                style={[css.input, { backgroundColor: bateria > 20 ? '#F0F0F0' : '#353535' }, { borderColor: bateria > 20 ? '#DADADA' : '#5F5F5F'}, { color: bateria > 20 ? 'black' : 'white' }]}
                 textInput={agenda}
                 onChangeText={ (digitado) => setAgenda(digitado)}
                 value={agenda}
                  />
                 <TextInput 
                 placeholder="Ida" 
-                style={css.input}
+                style={[css.input, { backgroundColor: bateria > 20 ? '#F0F0F0' : '#353535' }, { borderColor: bateria > 20 ? '#DADADA' : '#5F5F5F'}, { color: bateria > 20 ? 'black' : 'white' }]}
                 textInput={inicio}
                 onChangeText={ (digitado) => setInicio(digitado)}
                 value={inicio}
                 />
                 <TextInput placeholder="Volta"
-                style={css.input}
+                style={[css.input, { backgroundColor: bateria > 20 ? '#F0F0F0' : '#353535' }, { borderColor: bateria > 20 ? '#DADADA' : '#5F5F5F'}, { color: bateria > 20 ? 'black' : 'white' }]}
                 textInput={final}
                 onChangeText={ (digitado) => setFinal(digitado)}
                 value={final}
@@ -119,7 +129,6 @@ export default function Agenda()
                 <Lista agenda={item.agenda} 
                 inicio={item.inicio} 
                 final={item.final} />}
-
                 keyExtractor={ item => item.id}
             />
         </View>
@@ -127,17 +136,17 @@ export default function Agenda()
 }
 
 const css = StyleSheet.create({
-    
+    tudo: {
+      width: "100%",
+      height: "100%",
+    },
     container: {
         width: "90%",
         margin: 20,
-        backgroundColor: '#fff',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#ddd',
         padding: 20,
         marginBottom: 20,
-        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
@@ -151,9 +160,6 @@ const css = StyleSheet.create({
         marginBottom: 15,
         borderWidth: 1,
         fontSize: 14,
-        backgroundColor: '#F0F0F0',
-        borderColor: '#DADADA',
-        color: 'black',
     },
     btn:{
         width:"97%",
