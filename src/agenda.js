@@ -11,7 +11,7 @@ export default function Agenda()
     const[ inicio, setInicio ] = useState();
     const[ final, setFinal ] = useState();
     const[ dados, setDados ] = useState([]);
-    const[ bateria , setBateria] = useState()
+    const[ bateria, setBateria] = useState();
 
     const batteryLevel = useBatteryLevel();
 

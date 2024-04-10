@@ -1,12 +1,16 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const UserContext = createContext();
+
 
 function UserProvider ({children}) 
 {
         const[ usuario, setUsuario ] = useState(null);
         const[logado, setLogado] = useState(false); 
+
+        const [ login, setLogin ] = useState( false );
+        const [ cadastro, setCadastro ] = useState( false );
 
         async function Login( email, senha ) {
             if( email == "isabela@gmail.com" && senha == "1234") 
@@ -32,7 +36,7 @@ function UserProvider ({children})
 
 
         return (
-            <UserContext.Provider value={ {usuario: usuario, logado: logado, Login, infoUsuario} } >
+            <UserContext.Provider value={ {usuario: usuario, logado: logado, Login, infoUsuario, login: login, setLogin, cadastro: cadastro, setCadastro }}>
                 {children}
             </UserContext.Provider>
         )

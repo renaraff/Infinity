@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image } from "react-native";
 import { UserContext } from "./Context/UserContext";
 
@@ -8,10 +7,9 @@ export default function Login ()
     const[ email, setEmail ] = useState("");
     const[ senha, setSenha ] = useState("");
     const[ erro, setErro ] = useState( false );
-
     const {Login} = useContext( UserContext );
 
-    //import LinkCadastro from './cadastro'; onPress={LinkCadastro}
+    const {setLogin, setCadastro} = useContext( UserContext );
   
     function realizalogin()
     {
@@ -26,11 +24,11 @@ export default function Login ()
             <View style={css.caixa}>
                 <TextInput style={css.input} placeholder="E-mail" value={email} onChangeText={ (digitado) => setEmail( digitado )}></TextInput>
                 <TextInput style={css.input} placeholder="Senha" value={senha} onChangeText={ (digitado) => setSenha( digitado )}></TextInput>
-                <TouchableOpacity style={css.btn} onPress={realizalogin}>
-                    <Text style={css.btnText}>ENTRAR</Text>
+                <TouchableOpacity style={css.btnText} onPress={realizalogin}>
+                <Text onPress={ () => setLogin( true ) }>ENTRAR</Text>
                 </TouchableOpacity>
                 </View>
-                <View><Text style={css.cadastro}>Não tem conta? Cadastre-se</Text></View>
+                <View><Text onPress={() => {setCadastro( true); setLogin( true );}}>Não tem conta? Cadastre-se</Text></View>
                 { erro && <Text> Por favor confirme seus dados.</Text>}
         </View>        
         </View>
@@ -38,6 +36,10 @@ export default function Login ()
 }
 
 const css = StyleSheet.create ({
+    tudo: {
+        width: "100%",
+        height: "100%"
+    },
     container: {
         width: "100%",
         textAlign: 'center',
