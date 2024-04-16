@@ -27,7 +27,6 @@ function UserProvider ({children})
             setUsuario( usuario );
             setLogado( true ); 
             }
-            
         }
         
         useEffect( () => {

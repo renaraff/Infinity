@@ -1,7 +1,16 @@
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Touchable } from "react-native";
+import { useState, useEffect } from "react";
+import {useBatteryLevel} from "expo-battery"
 
+export default function Pacote({ titulo, imagem, preco, hospedagem, transporte, setDetalhe, setTitulo, setImagem, setPreco })
+{
+    const[ bateria, setBateria ] = useState();
 
-export default function Pacote({ titulo, imagem, preco, hospedagem, transporte, setDetalhe, setTitulo, setImagem, setPreco }) {
+    const batteryLevel = useBatteryLevel();
+
+    useEffect( () => {
+      setBateria( (batteryLevel *100).toFixed(0) )
+    } , [batteryLevel] );
 
     function ExibePacote()
     {
@@ -11,19 +20,19 @@ export default function Pacote({ titulo, imagem, preco, hospedagem, transporte, 
         setDetalhe( true );
     }
     return (
-        <View style={css.container}>
-        <View style={css.caixa}>
-            <Image style={css.imagem} source={imagem} />
-            <View style={css.caixatexto}>
-                <Text style={css.titulo}>{titulo}</Text>
-                <Text style={css.texto}>All Inclusive</Text>
-                <Text style={css.subtitulo}>{transporte}</Text>
-                <Text style={css.subtitulo}>{hospedagem}</Text>
-                <Text style={css.preco}>{preco}</Text>
-                <TouchableOpacity onPress={ExibePacote}>
-                    <Text style={css.subtitulo2}>Ver mais</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={[css.container, { backgroundColor: bateria > 20 ? '#F0F0F0' : '#353535' }]}>
+            <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
+                <Image style={css.imagem} source={imagem} />
+                <View style={css.caixatexto}>
+                    <Text style={[css.titulo,  { color: bateria > 20 ? '#000' : '#fff' }]}>{titulo}</Text>
+                    <Text style={css.texto}>All Inclusive</Text>
+                    <Text style={css.subtitulo}>{transporte}</Text>
+                    <Text style={css.subtitulo}>{hospedagem}</Text>
+                    <Text style={css.preco}>{preco}</Text>
+                    <TouchableOpacity onPress={ExibePacote}>
+                        <Text style={css.subtitulo2}>Ver mais</Text>
+                    </TouchableOpacity>
+                </View>
         </View>            
         </View>
     )
@@ -33,11 +42,12 @@ const css = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
+        width: "100%",
     },
     caixa: {
+        marginTop: "3%",
         flexDirection: 'row',
         width: "92%",
-        backgroundColor: '#fff', // Cor de fundo da caixa
         borderRadius: 10, // Raio dos cantos da caixa
         elevation: 5, // Sombra
         marginBottom: "5%"
@@ -51,7 +61,7 @@ const css = StyleSheet.create({
     titulo: {
         padding: 6,
         fontSize: 18, 
-        fontWeight: 'bold', 
+        fontWeight: '500', 
         marginBottom: 5, 
     },
     texto: {

@@ -27,7 +27,8 @@
     "react-native-uuid": "^2.0.2",
     "react-uuid": "^2.0.0",
     "uuid": "^9.0.1",
-    "expo-battery": "~7.7.2"
+    "expo-battery": "~7.7.2",
+    "expo-network": "~5.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
