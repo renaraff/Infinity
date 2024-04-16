@@ -25,7 +25,7 @@ const css = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: "100%"
+    width: "100%",
   },
   caixa: {
     width: "92%",

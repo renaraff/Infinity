@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image } from "react-native";
 import UserContext from "./Context/UserContext";
+import {useBatteryLevel} from "expo-battery"
 
 export default function Cadastro( {navigation} )
 {

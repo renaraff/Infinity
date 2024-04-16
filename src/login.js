@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image } from "react-native";
 import { UserContext } from "./Context/UserContext";
+import {useBatteryLevel} from "expo-battery"
 
 export default function Login ()
 {
@@ -11,6 +12,14 @@ export default function Login ()
 
     const {Login} = useContext( UserContext );
 
+    const[ bateria, setBateria ] = useState();
+
+    const batteryLevel = useBatteryLevel();
+
+    useEffect( () => {
+        setBateria( (batteryLevel *100).toFixed(0) )
+      } , [batteryLevel] );
+
     //import LinkCadastro from './cadastro'; onPress={LinkCadastro}
   
     function realizalogin()
@@ -19,13 +28,13 @@ export default function Login ()
     }
 
     return (  
-        <View style={css.tudo}> 
-        <View style={css.container}>
+        <View style={[css.tudo, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}> 
+        <View style={[css.container, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
             <Image style={css.imagem} source={require('../src/Logo.png' )}></Image>
-            <View><Text style={css.texto}>ENTRE PARA NAVEGAR</Text></View>
-            <View style={css.caixa}>
-                <TextInput style={css.input} placeholder="E-mail" value={email} onChangeText={ (digitado) => setEmail( digitado )}></TextInput>
-                <TextInput style={css.input} placeholder="Senha" value={senha} onChangeText={ (digitado) => setSenha( digitado )}></TextInput>
+            <View><Text style={[css.texto, { color: bateria > 20 ? '#000' : '#fff' }]}>ENTRE PARA NAVEGAR</Text></View>
+            <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)'}, { borderColor: bateria > 20 ?  '#ddd' : 'rgba(217, 217, 217, 0.2)'}]}>
+                <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="E-mail" placeholderTextColor="#808080" value={email} onChangeText={ (digitado) => setEmail( digitado )}></TextInput>
+                <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="Senha" placeholderTextColor="#808080"  value={senha} onChangeText={ (digitado) => setSenha( digitado )}></TextInput>
                 <TouchableOpacity style={css.btn} onPress={realizalogin}>
                     <Text style={css.btnText}>ENTRAR</Text>
                 </TouchableOpacity>
@@ -38,6 +47,9 @@ export default function Login ()
 }
 
 const css = StyleSheet.create ({
+    tudo: {
+        height: "100%"
+    },
     container: {
         width: "100%",
         textAlign: 'center',
@@ -47,10 +59,8 @@ const css = StyleSheet.create ({
     caixa: {
         width: "88%",
         margin: 20,
-        backgroundColor: '#EDEDED',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#ddd',
         padding: 20,
         marginBottom: 20,
         shadowColor: '#000',
@@ -68,9 +78,6 @@ const css = StyleSheet.create ({
         marginBottom: 15,
         borderWidth: 1,
         fontSize: 14,
-        backgroundColor: 'white',
-        borderColor: '#DADADA',
-        color: '#616161',
     },
     btn:{
         width:"97%",
