@@ -1,20 +1,30 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity, Image, StyleSheet,} from 'react-native'
+import { useState, useEffect } from "react";
+import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useBatteryLevel} from "expo-battery";
 
 export default function DetalhePacote({titulo, imagem, preco, setDetalhe }) {
 
+  const[ bateria, setBateria] = useState();
+
+  const batteryLevel = useBatteryLevel();
+
+  useEffect( () => {
+    setBateria( (batteryLevel *100).toFixed(0) )
+  } , [batteryLevel] );
+  
   return (
-    <View style={css.container}>
-      <View style={css.caixa}>
+    <View style={[css.container, { backgroundColor: bateria > 20 ? '#EFEFEF' : '#353535' }]}>
+      <View  style={[css.caixa, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, {shadowColor: bateria > 20 ? '#000' : '#1D1D1D'}, {borderColor: bateria > 20 ? '#ddd' : '#181818'}]}>
           <Image style={css.imagem} source={imagem}/>        
-        <Text style={css.titulo}>{titulo}</Text>
+        <Text style={[css.titulo, { color: bateria > 20 ? '#000' : '#fff' }]}>{titulo}</Text>
         <View style={css.valor}>
             <Text style={css.sifrao}>R$</Text>
             <Text style={css.preco}>{preco}</Text>      
         </View>   
         <TouchableOpacity onPress={ () => setDetalhe( false ) }>
-          <MaterialCommunityIcons style={css.botao} name="arrow-left" />
+          <MaterialCommunityIcons style={[css.botao, { color: bateria > 20 ? '#000' : '#fff' }]} name="arrow-left" />
         </TouchableOpacity>
       </View>
     </View>
@@ -26,6 +36,7 @@ const css = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: "100%",
+    height: "100%"
   },
   caixa: {
     width: "92%",
