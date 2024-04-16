@@ -1,12 +1,13 @@
 import 'react-native-gesture-handler';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, StatusBar } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet, TextInput, Button, Text, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity, StatusBar } from "react-native";
 
 import Login from './login';
 import Agenda from './agenda';
 import Mapa from './mapa';
+import SuasViagens from './SuasViagens';
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from './Context/UserContext';
 import Roteiros from './Roteiros';
@@ -18,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function Rotas() {
 
     const { login, setLogin, cadastro, setCadastro } = useContext(UserContext);
-    const[logado, setLogado] = useState(false); 
+    const [logado, setLogado] = useState(false);
     const [bateria, setBateria] = useState();
     const batteryLevel = useBatteryLevel();
 
@@ -38,10 +39,10 @@ export default function Rotas() {
                 <View style={[css.container, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
                     <Image style={css.imagem} source={require('../src/Logo.png')}></Image>
                     <View><Text style={[css.texto, { color: bateria > 20 ? '#000' : '#fff' }]}>CADASTRE-SE PARA NAVEGAR</Text></View>
-                    <View  style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)'}, { borderColor: bateria > 20 ?  '#ddd' : 'rgba(217, 217, 217, 0.2)'}]}>
-                        <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="E-mail" placeholderTextColor="#808080"></TextInput>
-                        <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="Senha" placeholderTextColor="#808080"></TextInput>
-                        <TouchableOpacity style={css.btn} onPress={ () => { setCadastro( false ); setLogin( false );}}>
+                    <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)' }, { borderColor: bateria > 20 ? '#ddd' : 'rgba(217, 217, 217, 0.2)' }]}>
+                        <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="E-mail" placeholderTextColor="#808080"></TextInput>
+                        <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="Senha" placeholderTextColor="#808080"></TextInput>
+                        <TouchableOpacity style={css.btn} onPress={() => { setCadastro(false); setLogin(false); }}>
                             <Text style={css.btnText}>CADASTRAR</Text>
                         </TouchableOpacity>
                     </View>
@@ -54,48 +55,46 @@ export default function Rotas() {
 
     return (
         <NavigationContainer>
-          <StatusBar
-            backgroundColor={bateria > 20 ? "white" : "black"}
-          />
-          <Tab.Navigator initialRouteName="Pacote"
-            screenOptions={{
-              headerStyle: {
-                backgroundColor: bateria > 20 ? "white" : "black",
-              },
-              headerTintColor: bateria > 20 ? "black" : "white",
-              tabBarStyle: {
-                backgroundColor: bateria > 20 ? "white" : "black",
-              },
-              tabBarActiveTintColor: bateria > 20 ? "black" : "white",
-              tabBarInactiveTintColor: bateria > 20 ? "rgba(0, 0, 0, 0.5)" : "rgba(255, 255, 255, 0.5)",
-            }}
-          >
-            <Tab.Screen name="Roteiros" component={Roteiros} options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="airplane" color={color} size={size} />
-              ),
-            }} />
-            <Tab.Screen name="Agendamento" component={Agenda} options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="calendar-check" color={color} size={size} />
-              ),
-            }} />
-            <Tab.Screen name="Mapa Interativo" component={Mapa} options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="map-marker" color={color} size={size} />
-              ),
-            }} />
-            <Tab.Screen name="Suas Viagens" component={SuasViagens} options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
-              ),
-            }} />
-          </Tab.Navigator>
+            <StatusBar
+                backgroundColor={bateria > 20 ? "white" : "black"}
+            />
+            <Tab.Navigator initialRouteName="Pacote"
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: bateria > 20 ? "white" : "black",
+                    },
+                    headerTintColor: bateria > 20 ? "black" : "white",
+                    tabBarStyle: {
+                        backgroundColor: bateria > 20 ? "white" : "black",
+                    },
+                    tabBarActiveTintColor: bateria > 20 ? "black" : "white",
+                    tabBarInactiveTintColor: bateria > 20 ? "rgba(0, 0, 0, 0.5)" : "rgba(255, 255, 255, 0.5)",
+                }}
+            >
+                <Tab.Screen name="Roteiros" component={Roteiros} options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="airplane" color={color} size={size} />
+                    ),
+                }} />
+                <Tab.Screen name="Agendamento" component={Agenda} options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="calendar-check" color={color} size={size} />
+                    ),
+                }} />
+                <Tab.Screen name="Mapa Interativo" component={Mapa} options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="map-marker" color={color} size={size} />
+                    ),
+                }} />
+                <Tab.Screen name="Suas Viagens" component={SuasViagens} options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                    ),
+                }} />
+            </Tab.Navigator>
         </NavigationContainer>
-      );
-    };
-
-
+    );
+};
 const css = StyleSheet.create({
     tudo: {
         height: "100%",
@@ -138,7 +137,7 @@ const css = StyleSheet.create({
         alignItems: 'center', // Centraliza horizontalmente
     },
     btnText: {
-          textAlign: 'center',
+        textAlign: 'center',
         fontSize: 14,
         color: 'rgba(255, 255, 255, 0.5)',
     },

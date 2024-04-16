@@ -17,7 +17,6 @@ export default function Login() {
         setBateria((batteryLevel * 100).toFixed(0))
     }, [batteryLevel]);
 
-    //import LinkCadastro from './cadastro'; onPress={LinkCadastro}
     const { setLogin, setCadastro } = useContext(UserContext);
 
     function realizalogin() {
@@ -32,9 +31,9 @@ export default function Login() {
                 <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)' }, { borderColor: bateria > 20 ? '#ddd' : 'rgba(217, 217, 217, 0.2)' }]}>
                     <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="E-mail" placeholderTextColor="#808080" value={email} onChangeText={(digitado) => setEmail(digitado)}></TextInput>
                     <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="Senha" placeholderTextColor="#808080" value={senha} onChangeText={(digitado) => setSenha(digitado)}></TextInput>
-                    <TouchableOpacity style={css.btn} onPress={realizalogin}>
-                        <Text style={css.btnText} onPress={() => setLogin(true)}>ENTRAR</Text>
-                    </TouchableOpacity>
+                    <TouchableOpacity style={css.btn} onPress={ () => setLogin( true ) }>
+                <Text style={css.btnText}>ENTRAR</Text>
+            </TouchableOpacity>
                 </View>
                 <View><Text style={css.cadastro} onPress={() => { setCadastro(true); setLogin(true); }}>Não tem conta? Cadastre-se</Text></View>
                 {erro && <Text> Por favor confirme seus dados.</Text>}
