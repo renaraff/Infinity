@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text, Image, TouchableOpacity } from "react-native";
 
 import Login from './login';
 import Agenda from './agenda';
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function Rotas() {
 
     const { login, setLogin, cadastro, setCadastro } = useContext(UserContext);
-
+    const[logado, setLogado] = useState(false); 
     const [bateria, setBateria] = useState();
     const batteryLevel = useBatteryLevel();
 
@@ -42,12 +42,12 @@ export default function Rotas() {
                     <View  style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)'}, { borderColor: bateria > 20 ?  '#ddd' : 'rgba(217, 217, 217, 0.2)'}]}>
                         <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="E-mail" placeholderTextColor="#808080"></TextInput>
                         <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000'}, {borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)'}, {color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)"}]} placeholder="Senha" placeholderTextColor="#808080"></TextInput>
-                        <TouchableOpacity style={css.btn} onPress={() => setLogado(true)}>
-                            <Text style={css.btnText} onPress={() => { setCadastro(false); setLogin(false); }}>CADASTRAR</Text>
+                        <TouchableOpacity style={css.btn} onPress={ () => { setCadastro( false ); setLogin( false );}}>
+                            <Text style={css.btnText}>CADASTRAR</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Text style={css.cadastro} onPress={() => { setCadastro(false); setLogin(true); }}>Já possui uma conta? Entre</Text></View>
+                        <Text style={css.cadastro} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text></View>
                 </View>
             </View>
         )
@@ -123,7 +123,7 @@ const css = StyleSheet.create({
         alignItems: 'center', // Centraliza horizontalmente
     },
     btnText: {
-        textAlign: 'center',
+          textAlign: 'center',
         fontSize: 14,
         color: 'rgba(255, 255, 255, 0.5)',
     },
