@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image } from "react-native";
-import { UserContext } from "./Context/UserContext";
+import { UserContext } from "./src/Context/UserContext";
 import { useBatteryLevel } from "expo-battery"
 
 export default function Login() {
@@ -26,14 +26,14 @@ export default function Login() {
     return (
         <View style={[css.tudo, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
             <View style={[css.container, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
-                <Image style={css.imagem} source={require('../src/Logo.png')}></Image>
+                <Image style={css.imagem} source={require('./assets/imagem/Logo.png')}></Image>
                 <View><Text style={[css.texto, { color: bateria > 20 ? '#000' : '#fff' }]}>ENTRE PARA NAVEGAR</Text></View>
                 <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)' }, { borderColor: bateria > 20 ? '#ddd' : 'rgba(217, 217, 217, 0.2)' }]}>
                     <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="E-mail" placeholderTextColor="#808080" value={email} onChangeText={(digitado) => setEmail(digitado)}></TextInput>
                     <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="Senha" placeholderTextColor="#808080" value={senha} onChangeText={(digitado) => setSenha(digitado)}></TextInput>
-                    <TouchableOpacity style={css.btn} onPress={ () => setLogin( true ) }>
-                <Text style={css.btnText}>ENTRAR</Text>
-            </TouchableOpacity>
+                    <TouchableOpacity style={css.btn} onPress={() => setLogin(true)}>
+                        <Text style={css.btnText}>ENTRAR</Text>
+                    </TouchableOpacity>
                 </View>
                 <View><Text style={css.cadastro} onPress={() => { setCadastro(true); setLogin(true); }}>Não tem conta? Cadastre-se</Text></View>
                 {erro && <Text> Por favor confirme seus dados.</Text>}

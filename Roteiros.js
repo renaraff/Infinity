@@ -32,7 +32,7 @@ export default function Roteiros() {
     const roteiros = [
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/suica.png") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require('./assets/imagem/suica.png') : require("./assets/imagem/carregando.png"),
             titulo: "Pacote Suiça 2025",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -40,7 +40,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/grecia.png") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/grecia.png") : require("./assets/imagem/carregando.png"),
             titulo: "Pacote Grécia",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -48,7 +48,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/maceio.jpg") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/maceio.jpg") : require("./assets/imagem/carregando.png"),
             titulo: "Pacote Maceió",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -56,7 +56,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/beto-carrero.jpg") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/beto-carrero.jpg") : require("./assets/imagem/carregando.png"),
             titulo: "Pacote Beto Carrero",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -64,7 +64,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/new-york.jpg") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/new-york.jpg") : require("./assets/imagem/carregando.png"),
             titulo: "Nova Iorque 2024",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -72,7 +72,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/sao-paulo.jpg") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/sao-paulo.jpg") : require("./assets/imagem/carregando.png"),
             titulo: "São Paulo Julho",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -80,7 +80,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/italia.webp") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/italia.webp") : require("./assets/imagem/carregando.png"),
             titulo: "Pacote Itália",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",
@@ -88,7 +88,7 @@ export default function Roteiros() {
         },
         {
             id: uuid(),
-            imagem: rede ? require("../assets/imagem/mexico.jpg") : require("../assets/imagem/carregando.png"),
+            imagem: rede ? require("./assets/imagem/mexico.jpg") : require("./assets/imagem/carregando.png"),
             titulo: "México Maio 2026",
             hospedagem: "A Mais cara",
             transporte: "O Mais rápido",

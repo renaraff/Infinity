@@ -9,7 +9,7 @@ import Agenda from './agenda';
 import Mapa from './mapa';
 import SuasViagens from './SuasViagens';
 import { useContext, useState, useEffect } from 'react';
-import { UserContext } from './Context/UserContext';
+import { UserContext } from './src/Context/UserContext';
 import Roteiros from './Roteiros';
 import { useBatteryLevel } from "expo-battery"
 
@@ -37,7 +37,7 @@ export default function Rotas() {
         return (
             <View style={[css.tudo, { backgroundColor: bateria > 20 ? '#ffff' : '#000' }]}>
                 <View style={[css.container, { backgroundColor: bateria > 20 ? '#fff' : '#000' }]}>
-                    <Image style={css.imagem} source={require('../src/Logo.png')}></Image>
+                    <Image style={css.imagem} source={require('./assets/imagem/Logo.png')}></Image>
                     <View><Text style={[css.texto, { color: bateria > 20 ? '#000' : '#fff' }]}>CADASTRE-SE PARA NAVEGAR</Text></View>
                     <View style={[css.caixa, { backgroundColor: bateria > 20 ? '#EDEDED' : 'rgba(217, 217, 217, 0.2)' }, { borderColor: bateria > 20 ? '#ddd' : 'rgba(217, 217, 217, 0.2)' }]}>
                         <TextInput style={[css.input, { backgroundColor: bateria > 20 ? '#fff' : '#000' }, { borderColor: bateria > 20 ? '#DADADA' : 'rgba(70, 70, 70, 1)' }, { color: bateria > 20 ? "#616161" : "rgba(255, 255, 255, 0.50)" }]} placeholder="E-mail" placeholderTextColor="#808080"></TextInput>
